@@ -38,37 +38,51 @@
                                         <td class="success">{{$shift->name}}</td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "sat")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "sun")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "mon")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "tue")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "wed")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "thu")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($shift->shiftTimetables()->where('day', "fri")->get() as $shiftTimetable)
-                                                <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @if($shiftTimetable->timetable!=null)
+                                              <b>({{$shiftTimetable->timetable->name}}) </b>{{$shiftTimetable->timetable->start_time}} - {{$shiftTimetable->timetable->end_time}}<br>
+                                            @endif
                                             @endforeach
                                         </td>
                                         <td>
@@ -142,4 +156,3 @@
     </script>
 
 @stop
-

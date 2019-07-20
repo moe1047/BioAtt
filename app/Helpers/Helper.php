@@ -46,7 +46,7 @@ class Helper
 
 
             /*** if this day is a working day */
-            if(count($user_shifts->first())){
+            if(count($user_shifts->first()) and $user_shifts->first()->shift != null){
                 $user_shifts=$user_shifts->first()
                     //get the shifts and the shift timetables.
                     ->shift->shiftTimetables()->where('day',$day)->get();
@@ -85,12 +85,23 @@ class Helper
                         $report["$date"]['total_absent_min']=$report["$date"]['total_absent_min']+$time_table_report['total_absent_min'];
                         $report["$date"]['total_worked_min']=$report["$date"]['total_worked_min']+$time_table_report['total_worked_min'];
 
-                        $report["$date"]['shifts'][]=["start_time"=>$user_shift->timetable->start_time,
-                            "end_time"=>$user_shift->timetable->end_time,
-                            "clock_in_time"=>$time_table_report['clock_in_time'],
-                            "clock_out_time"=>$time_table_report['clock_out_time'],
-                            "late"=>$time_table_report['late'],"early"=>$time_table_report['early'],
-                            "total_shift_min"=>$time_table_report['total_min']];
+                            if($user_shift->timetable != null){
+                              $report["$date"]['shifts'][]=["start_time"=>$user_shift->timetable->start_time,
+                                  "end_time"=>$user_shift->timetable->end_time,
+                                  "clock_in_time"=>$time_table_report['clock_in_time'],
+                                  "clock_out_time"=>$time_table_report['clock_out_time'],
+                                  "late"=>$time_table_report['late'],"early"=>$time_table_report['early'],
+                                  "total_shift_min"=>$time_table_report['total_min']];
+
+                            }else{
+                              $report["$date"]['shifts'][]=["start_time"=>"-",
+                                  "end_time"=>"-",
+                                  "clock_in_time"=>"-",
+                                  "clock_out_time"=>"-",
+                                  "late"=>"-","early"=>"-",
+                                  "total_shift_min"=>"-"];
+
+                        }
 
                     }
 
@@ -152,6 +163,7 @@ class Helper
     }
 
     public static function getTimeTableAttendance($user_id,$date,$timetable){
+      if($timetable!=null){
         $attendances=Attendance::where('USERID',$user_id)->get();
         $start_time=Carbon::parse(Carbon::parse($timetable->start_time)->format('H:i:s'));
         $end_time=Carbon::parse(Carbon::parse($timetable->end_time)->format('H:i:s'));
@@ -235,6 +247,21 @@ class Helper
 
         }
         ;
+
+      }else{
+        $time_table_report['total_min']=0;
+        $time_table_report['clock_in_time']=0;
+        $time_table_report['total_worked_min']=0;
+        $time_table_report['total_absent_min']=0;
+        $time_table_report['shift']=0;
+        $time_table_report['absent_shift']=0;
+        $time_table_report['late']=0;
+        $time_table_report['present']=0;
+        $time_table_report['clock_out_time']=0;
+        $time_table_report['early']=0;
+
+      }
+
         return $time_table_report;
     }
 

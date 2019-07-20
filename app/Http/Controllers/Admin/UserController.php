@@ -17,7 +17,9 @@ class UserController extends \App\Http\Controllers\Controller
         $default_year=AcademicYear::where('default',true)->get()->first()->id;
         $shifts=Shift::where('clicklizeAcYear_id',$default_year)->pluck('name','id');
 
+
         $all_shifts=Shift::where('clicklizeAcYear_id',$default_year)->get();
+
 
         return view('user.AssignShift',compact('users','shifts','all_shifts'));
     }
